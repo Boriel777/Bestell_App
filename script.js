@@ -1,3 +1,5 @@
 function init() {
-    return
+    addMenuHTML();  
 };
+
+init();

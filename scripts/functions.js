@@ -2,7 +2,7 @@ const categories = [...new Set(Menu.map(meal => meal.category))];
 let categoryArray = Array.from(categories);
 
 function addMenuHTML() {
-    let contentRef = document.getElementById('Menu_wrapper')
+    let contentRef = document.getElementById('Menu_wrapper');
     contentRef.innerHTML = "";
 
     for (let i = 0; i < categoryArray.length; i++) {
@@ -15,4 +15,9 @@ function addMenuHTML() {
         }
         contentRef.innerHTML += getMenuTemplate(currentCategory, mealsInCategory);
     };
+};
+
+function addBasketHTML() {
+    let contentRef = document.getElementById('shopping_cart');
+    contentRef.innerHTML += getBasketMealTemplate(meal);
 };

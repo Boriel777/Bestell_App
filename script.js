@@ -1,5 +1,7 @@
 function init() {
-    addMenuHTML();  
+    addMenuHTML();
+    renderNavPoints();
+    renderFilterButtons();
 };
 
 init();

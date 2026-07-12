@@ -28,7 +28,7 @@ function getMenuTemplate(category, meal) {
 function getMealTemplate(meal) {
     return `
     <div class="meal_wrapper" id="${meal.id}">
-        <img src="" alt="${meal.meal_name} Foto">
+        <img src="${meal.img}" alt="${meal.meal_name} Foto">
         <h3 class="meal_name">${meal.meal_name}</h3>
         <p><span>Zutaten:</span> ${meal.ingredients}</p>
         <div class="cta_wrapper"><p><span>Preis:</span> € ${meal.price.toFixed(2)}</p>

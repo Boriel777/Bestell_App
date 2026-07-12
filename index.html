@@ -13,18 +13,20 @@
     <script src="./scripts/db.js" defer></script>
     <script src="./scripts/templates.js" defer></script>
     <script src="./scripts/functions.js" defer></script>
+    <script src="./scripts/navigation.js" defer></script>
     <script src="./script.js" defer></script>
     <title>Bestell App</title>
 </head>
 
 <body>
     <header>
-        <a href="#"><img src="" alt="Logo"></a>
-        <nav>---</nav>
+        <a href=""><img src="assets/icons/Logo 01.svg" alt="Logo"></a>
+        <nav id="menu_navigation"></nav>
     </header>
     <main>
         <h1>Dali's Imbiss</h1>
-        <section class="menu_navigation">
+        <section class="categories_navigation">
+            <label for="#categories_nav">Filter:</label>
             <nav id="categories_nav"></nav>
         </section>
         <section class="menu">

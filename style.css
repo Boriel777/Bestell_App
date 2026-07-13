@@ -1,0 +1,22 @@
+/* main Styles */
+
+/* - Menu Wrapper Styles */
+
+section.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    align-items: flex-start;
+}
+
+aside#shopping_cart {
+    position: sticky;
+    top: 0;
+    width: 350px;
+    align-self: flex-start;
+}
+
+/* - Menu Wrapper Styles END */
+
+/* main Styles END */

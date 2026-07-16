@@ -31,16 +31,22 @@ function getMealTemplate(meal) {
         <h3 class="meal_name">${meal.meal_name}</h3>
         <p><span>Zutaten:</span> ${meal.ingredients}</p>
         <div class="cta_wrapper"><p><span>Preis:</span> € ${meal.price.toFixed(2)}</p>
-        <button type="submit" onclick="pushToShoppingCart('${meal.meal_name}', ${meal.price}, '${meal.id}')">Zum Warenkorb</button></div>
+            <button type="submit" id="to_basket_cta-${meal.id}" onclick="pushToShoppingCart('${meal.meal_name}', ${meal.price}, '${meal.id}')">
+                In den Warenkorb
+            </button>
+        </div>
     `;
 };
 
 let ShoppingCartArray = [];
 
-function getShoppingCartTemplate(mealName, mealPrice, mealId) {
+function getShoppingCartTemplate() {
     let ShoppingCartHTML = "";
-    let ShoppingCart = document.getElementById("shopping_cart");
+
     for (let i = 0; i < ShoppingCartArray.length; i++) {
+        let mealName = ShoppingCartArray[i].title;
+        let mealPrice = ShoppingCartArray[i].price;
+        let mealId = ShoppingCartArray[i].id;
         ShoppingCartHTML += getShoppingCartMealTemplate(mealName, mealPrice, mealId);
     }
 
@@ -54,10 +60,17 @@ function getShoppingCartMealTemplate(mealName, mealPrice, mealId) {
     return `
     <div class="cart_meal_wrapper" id="${mealId}">
         <h3 class="meal_name">${mealName}</h3>
-        <div class="price_wrapper"><button type="submit">+</button><button type="submit">-</button>
-        <p><span>Preis:</span> € ${mealPrice.toFixed(2)}</p>
+        <button type="submit" id="${mealId}-delete" onclick="removeFromCart('${mealId}')"><img src="assets/icons/delete.svg"></button>
+        <div class="price_wrapper">
+            <button type="submit" onclick="changeAmount('${mealId}', 1)">+</button>
+            <p id="${mealId}-amount">1</p>
+            <button id="${mealId}-minus" class="hidden" type="submit" onclick="changeAmount('${mealId}', -1)">-</button>
+            <p id="${mealId}-price"><span>Preis:</span> € ${mealPrice.toFixed(2)}</p>
+        </div>
     </div>
     `;
 };
+
+
 
 // add function das preis addiert statt neues element erzeugt.

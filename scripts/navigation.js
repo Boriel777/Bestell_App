@@ -1,5 +1,20 @@
 //Hamburger menu
 
+function toggleHamburgerMenu() {
+    let btnRef = document.getElementById('hamburger_btn');
+    let navRef = document.getElementById('hamburger_nav_list');
+
+    if (btnRef.classList.contains("open")) {
+        btnRef.classList.remove("open");
+        btnRef.setAttribute("aria-expanded", "false");
+        navRef.classList.add("hidden");
+    } else {
+        btnRef.classList.add("open");
+        btnRef.setAttribute("aria-expanded", "true");
+        navRef.classList.remove("hidden");
+    };
+};
+
 function addNavPoints() {
     let navPoints = [];
     for (let i = 0; i < Menu.length; i++) {
@@ -35,7 +50,7 @@ function buildHamburgerNav(navPoints) {
 
 function renderNavPoints() {
   let navPoints = addNavPoints(Menu);
-  document.querySelector("#menu_navigation").innerHTML = buildHamburgerNav(navPoints);
+  document.querySelector("#hamburger_nav_list").innerHTML = buildHamburgerNav(navPoints);
 };
 
 //Filter Function

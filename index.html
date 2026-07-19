@@ -22,13 +22,21 @@
 <body>
     <header>
         <a href=""><img src="assets/icons/Logo 01.svg" alt="Logo"></a>
-        <nav id="menu_navigation"></nav>
+        <nav id="menu_navigation">
+            <button id="hamburger_btn" onclick="toggleHamburgerMenu()" aria-label="Menü öffnen" aria-expanded="false">
+                <span class="hamburger_line"></span>
+                <span class="hamburger_line"></span>
+                <span class="hamburger_line"></span>
+            </button>
+            <ul id="hamburger_nav_list" class="hidden"></ul>
+        </nav>
         <nav id="mobile_nav">
             <ul>
                 <li><a href="#"><img src="assets/icons/home.svg" alt="Home"></a></li>
                 <li><img src="assets/icons/person.svg" alt="Profil (bald verfügbar)"></li>
                 <li><img src="assets/icons/takeout_dining_2.svg" alt="Letzte Bestellung (bald verfügbar)"></li>
-                <li><button onclick="openCartModal()" id="cart_trigger"><img src="assets/icons/shopping_cart.svg" alt="Warenkorb öffnen"></button></li>
+                <li><button onclick="openCartModal()" id="cart_trigger"><img src="assets/icons/shopping_cart.svg"
+                            alt="Warenkorb öffnen"></button></li>
             </ul>
         </nav>
     </header>
@@ -53,7 +61,8 @@
             <p>Danke für deine Bestellung, deine Lieferung ist unterwegs.</p>
         </div>
     </div>
-    <div id="cart_modal" class="hidden"><button id="cart_modal_close_btn" aria-label="Warenkorb schließen">&times;</button></div>
+    <div id="cart_modal" class="hidden"><button id="cart_modal_close_btn"
+            aria-label="Warenkorb schließen">&times;</button></div>
 </body>
 
 </html>

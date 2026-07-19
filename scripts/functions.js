@@ -24,21 +24,22 @@ function addMenuHTML() {
 
 function addShoppingCartHTML(mealName, mealPrice, mealId) {
     let contentRef = document.getElementById('shopping_cart');
-    contentRef.innerHTML = "";
 
-    for (let i = 0; i < Menu.length; i++) {
-        let mealName = Menu[i].meal_name;
-        let mealPrice = Menu[i].price;
-        let mealId = Menu[i].id;
+    if (ShoppingCartArray.length === 0) {
+        contentRef.classList.add("hidden");
+        contentRef.innerHTML = getShoppingCartTemplate();
+    } else {
+        contentRef.classList.remove("hidden");
+        contentRef.innerHTML = getShoppingCartTemplate();
     }
-    contentRef.innerHTML = getShoppingCartTemplate(mealName, mealPrice, mealId);
+
     syncCartDisplay();
 };
 
 function pushToShoppingCart(mealName, mealPrice, mealId) {
-    let contentRef = document.getElementById('shopping_cart_wrapper')
     let alreadyThere = false;
     let existingMeal = null;
+    let wasEmpty = ShoppingCartArray.length === 0;
 
     for (let j = 0; j < ShoppingCartArray.length; j++) {
         if (ShoppingCartArray[j].id === mealId) {
@@ -52,15 +53,20 @@ function pushToShoppingCart(mealName, mealPrice, mealId) {
             id: mealId,
             title: mealName,
             price: mealPrice,
-            amount:1,
+            amount: 1,
         });
-        contentRef.innerHTML += getShoppingCartMealTemplate(mealName, mealPrice, mealId);
     } else {
-        existingMeal.amount +=1;
-        updateShoppingCartDisplay(mealId);
+        existingMeal.amount += 1;
     };
-    updateMealCtaBtn(mealId);
-    saveToLocalStorage();
+
+    if (wasEmpty) {
+        addShoppingCartHTML();
+    } else if (!alreadyThere) {
+        let contentRef = document.getElementById('shopping_cart_wrapper')
+        contentRef.innerHTML += getShoppingCartMealTemplate(mealName, mealPrice, mealId);
+    };
+
+    refreshCart(mealId);
     return ShoppingCartArray;
 };
 
@@ -79,7 +85,7 @@ function updateShoppingCartDisplay(mealId) {
     amountRef.textContent = meal.amount;
     priceRef.textContent = `€ ${(meal.price * meal.amount).toFixed(2)}`;
 
-     if (meal.amount <= 1) {
+    if (meal.amount <= 1) {
         minusRef.classList.add("hidden");
     } else {
         minusRef.classList.remove("hidden");
@@ -92,7 +98,7 @@ function changeAmount(mealId, delta) {
         if (ShoppingCartArray[i].id === mealId) {
             meal = ShoppingCartArray[i];
             break;
-        }        
+        }
     }
 
     if (meal.amount + delta < 1) {
@@ -100,9 +106,7 @@ function changeAmount(mealId, delta) {
     }
 
     meal.amount += delta;
-    updateShoppingCartDisplay(mealId);
-    updateMealCtaBtn(mealId);
-    saveToLocalStorage();
+    refreshCart(mealId);
 };
 
 function removeFromCart(mealId) {
@@ -113,10 +117,9 @@ function removeFromCart(mealId) {
         }
     }
 
-    let cardRef = document.getElementById(mealId);
-    cardRef.remove();
-    updateMealCtaBtn(mealId);
     saveToLocalStorage();
+    addShoppingCartHTML();
+    syncCtaButtons();
 };
 
 // UX Schmuck:
@@ -128,7 +131,7 @@ function updateMealCtaBtn(mealId) {
     for (let i = 0; i < ShoppingCartArray.length; i++) {
         if (ShoppingCartArray[i].id === mealId) {
             meal = ShoppingCartArray[i];
-            break;            
+            break;
         }
     };
     let ctaRef = document.getElementById(`to_basket_cta-${mealId}`);
@@ -142,10 +145,79 @@ function updateMealCtaBtn(mealId) {
     };
 };
 
+function updateCheckSum() {
+    let subtotal = 0;
 
+    for (let i = 0; i < ShoppingCartArray.length; i++) {
+        subtotal += ShoppingCartArray[i].price * ShoppingCartArray[i].amount;
+    };
 
-// Warenkorb Funktionalität:
+    let deliveryFee;
+    if (ShoppingCartArray.length === 0) {
+        deliveryFee = 0;
+    } else {
+        deliveryFee = 5;
+    };
 
-// - bei erstem click soll Zum Warenkorb sich in einem + button verwandeln und ein - button soll sich daneben zeigen.
-// - Müllkorb in der Gerichtkarte ? optional
-// - Das ganze soll in localStorage gespeichert werden
+    let total = subtotal + deliveryFee;
+
+    let checkSumRef = document.getElementById("check_sum");
+    checkSumRef.innerHTML = getShoppingCartSumTemplate(subtotal, deliveryFee, total);
+
+};
+
+function refreshCart(mealId) {
+    updateShoppingCartDisplay(mealId);
+    updateMealCtaBtn(mealId);
+    updateCheckSum();
+    saveToLocalStorage();
+};
+
+function placeOrder() {
+    openModal();
+    clearCart();
+};
+
+function clearCart() {
+    ShoppingCartArray = [];
+    saveToLocalStorage();
+    addShoppingCartHTML();
+    syncCtaButtons();
+};
+
+function openModal() {
+    let modalRef = document.getElementById("order_modal");
+    modalRef.classList.remove("hidden");
+};
+
+function closeModal() {
+    let modalRef = document.getElementById("order_modal");
+    modalRef.classList.add("hidden");
+};
+
+function openCartModal() {
+    let cartRef = document.getElementById('shopping_cart');
+    let modalRef = document.getElementById('cart_modal');
+    let closeRef = document.getElementById('cart_modal_close_btn')
+
+    modalRef.appendChild(cartRef);
+    modalRef.classList.remove("hidden");
+    cartRef.classList.remove("hidden");
+
+    modalRef.onclick = closeCartModal;
+    cartRef.onclick = function(event) {
+        event.stopPropagation();
+    }
+    closeRef.onclick = closeCartModal;
+    closeRef.focus();
+    document.body.classList.add("modal_open");
+};
+
+function closeCartModal() {
+    let cartRef = document.getElementById('shopping_cart');
+    let asideRef = document.querySelector('section.menu');
+
+    asideRef.appendChild(cartRef);
+    document.getElementById('cart_modal').classList.add("hidden");
+    document.body.classList.remove("modal_open");
+};

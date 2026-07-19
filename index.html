@@ -23,6 +23,14 @@
     <header>
         <a href=""><img src="assets/icons/Logo 01.svg" alt="Logo"></a>
         <nav id="menu_navigation"></nav>
+        <nav id="mobile_nav">
+            <ul>
+                <li><a href="#"><img src="assets/icons/home.svg" alt="Home"></a></li>
+                <li><img src="assets/icons/person.svg" alt="Profil (bald verfügbar)"></li>
+                <li><img src="assets/icons/takeout_dining_2.svg" alt="Letzte Bestellung (bald verfügbar)"></li>
+                <li><button onclick="openCartModal()" id="cart_trigger"><img src="assets/icons/shopping_cart.svg" alt="Warenkorb öffnen"></button></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <h1>Dali's Imbiss</h1>
@@ -32,12 +40,20 @@
         </section>
         <section class="menu">
             <div id="Menu_wrapper"></div>
-            <aside id="shopping_cart"></aside>
+            <div id="shopping_cart"></div>
         </section>
     </main>
     <footer>
-        &copy;2026 Dalibor Durbas 
+        &copy;2026 Dalibor Durbas
     </footer>
+    <div id="order_modal" class="hidden" onclick="closeModal()">
+        <div class="modal_content">
+            <button id="modal_close" onclick="closeModal()" aria-label="Bestätigung schließen">&times;</button>
+            <img src="" alt="Bestellung erfolgreich">
+            <p>Danke für deine Bestellung, deine Lieferung ist unterwegs.</p>
+        </div>
+    </div>
+    <div id="cart_modal" class="hidden"><button id="cart_modal_close_btn" aria-label="Warenkorb schließen">&times;</button></div>
 </body>
 
 </html>

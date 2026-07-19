@@ -12,8 +12,8 @@ function getFromLocalStorage() {
 };
 
 function syncCtaButtons() {
-    for (let i = 0; i < ShoppingCartArray.length; i++) {
-        updateMealCtaBtn(ShoppingCartArray[i].id);        
+    for (let i = 0; i < Menu.length; i++) {
+        updateMealCtaBtn(Menu[i].id);        
     }
 };
 

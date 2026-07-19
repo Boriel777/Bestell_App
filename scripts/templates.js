@@ -20,7 +20,7 @@ function getMenuTemplate(category, meal) {
     return `
     <section id="cat-${id}">
         <h2 id="title-${id}">${category}</h2>
-        <div class="meal_wrapper" id="${meal.id}">${mealsHTML}</div>
+        <div class="meal_wrapper">${mealsHTML}</div>
     </section>
     `;
 };
@@ -41,18 +41,35 @@ function getMealTemplate(meal) {
 let ShoppingCartArray = [];
 
 function getShoppingCartTemplate() {
+    if (ShoppingCartArray.length === 0) {
+        return `
+        <h2>Dein Warenkorb</h2>
+        <p>Dein Warenkorb ist leer.</p>
+        <img src="assets/icons/shopping_cart.svg" alt="Leerer Warenkorb">
+        `;
+    }
+
     let ShoppingCartHTML = "";
+    let subtotal = 0;
 
     for (let i = 0; i < ShoppingCartArray.length; i++) {
         let mealName = ShoppingCartArray[i].title;
         let mealPrice = ShoppingCartArray[i].price;
         let mealId = ShoppingCartArray[i].id;
+        let mealAmount = ShoppingCartArray[i].amount;
+
+        subtotal += mealPrice * mealAmount;
         ShoppingCartHTML += getShoppingCartMealTemplate(mealName, mealPrice, mealId);
     }
+    
+    let deliveryFee = 5;
+    let total = subtotal + deliveryFee;
 
     return `
     <h2>Dein Warenkorb</h2>
     <div id="shopping_cart_wrapper">${ShoppingCartHTML}</div>
+    <div id="check_sum">${getShoppingCartSumTemplate(subtotal, deliveryFee, total)}</div>
+    <button onclick="placeOrder()">Jetzt Bestellen</button>
     `;
 };
 
@@ -71,6 +88,13 @@ function getShoppingCartMealTemplate(mealName, mealPrice, mealId) {
     `;
 };
 
-
-
-// add function das preis addiert statt neues element erzeugt.
+function getShoppingCartSumTemplate(subtotal, deliveryFee, total) {
+    return `
+        <div class="cart_sum">
+            <span>Zwischensumme:</span><p>€ ${subtotal.toFixed(2)}</p>
+            <span>Lieferkosten:</span><p>€ ${deliveryFee.toFixed(2)}</p>
+        </div><hr><div class="cart_sum">
+        <span>Gesamtbetrag:</span><p>€ ${total.toFixed(2)}</p>
+        </div>
+    `;
+};

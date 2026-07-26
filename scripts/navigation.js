@@ -8,10 +8,12 @@ function toggleHamburgerMenu() {
         btnRef.classList.remove("open");
         btnRef.setAttribute("aria-expanded", "false");
         navRef.classList.add("hidden");
+        navRef.classList.remove("is_open");
     } else {
         btnRef.classList.add("open");
         btnRef.setAttribute("aria-expanded", "true");
         navRef.classList.remove("hidden");
+        navRef.classList.add("is_open");
     };
 };
 

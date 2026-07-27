@@ -20,12 +20,17 @@
     --powder-blue: #a6c6deff;
     --smart-blue: #4667afff;
 
-
+    --shadow-light: 0px 2px 8px rgb(0 0 0 / 15%);
 }
 
 /* root CSS END */
 
 /* CI CSS */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--amber-earth) var(--taupe);
+}
 
 html,
 body {
@@ -36,7 +41,24 @@ body {
     background-color: var(--cream-whip);
 }
 
-h1, h2, h3, h4 {
+main {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    gap: 25px;
+}
+
+@media (max-width: 1024px) {
+    main {
+        margin: 0 clamp(0.3125rem, -2.2768rem + 12.9464vw, 9.375rem);
+    }
+}
+
+
+h1,
+h2,
+h3,
+h4 {
     font-family: var(--display-font);
 }
 
@@ -51,7 +73,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     letter-spacing: 2%;
 }
 
@@ -60,7 +82,29 @@ h4 {
 }
 
 li {
-   list-style: none; 
+    list-style: none;
+}
+
+button {
+    width: max-content;
+    background: none;
+    border: none;
+    border-radius: 35px;
+    background-color: var(--taupe);
+    padding: 10px 15px;
+    color: var(--cream-whip);
+    font-size: 0.8rem;
+    font-weight: var(--bold);
+    transition: all 35ms ease-in-out;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+label {
+    font-weight: var(--medium);
+    font-size: 1.1rem;
 }
 
 /* CI CSS END*/

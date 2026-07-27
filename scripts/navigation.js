@@ -41,10 +41,10 @@ function addNavPoints() {
 };
 
 function buildHamburgerNav(navPoints) {
-    let navPointHTML = "";
+    let navPointHTML = `<li><button onclick="filterMenu('alle'); toggleHamburgerMenu();">Alle</button></li>`;
     for (let i = 0; i < navPoints.length; i++) {
         navPointHTML += `
-        <li><a href="#title-${navPoints[i].id}">${navPoints[i].title}</a></li>
+        <li><button onclick="filterMenu('${navPoints[i].title}'); toggleHamburgerMenu();">${navPoints[i].title}</button></li>
         `;
     };
     return navPointHTML;

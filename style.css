@@ -16,6 +16,7 @@ header.main_header {
     width: 100%;
     height: 25dvh;
     object-fit: cover;
+    border-radius: 0 0 35px 35px;
 }
 
 /* Nav Styles */
@@ -27,6 +28,7 @@ header.main_header {
     gap: 6px;
     width: 30px;
     height: 24px;
+    padding: 0;
     background: none;
     border: none;
     cursor: pointer;
@@ -36,7 +38,8 @@ header.main_header {
     display: block;
     width: 100%;
     height: 3px;
-    background-color: black;
+    border-radius: 35px;
+    background-color: var(--papaya-whip);
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -64,7 +67,14 @@ ul#hamburger_nav_list.is_open {
     text-align: center;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
+
+#hamburger_nav_list button {
+    margin: 5px;
+    font-size: 1.2rem;
+}
+
 /* Nav Styles END */
 
 /* Mobile-nav Styles */
@@ -72,7 +82,7 @@ ul#hamburger_nav_list.is_open {
 #mobile_nav {
     width: 100%;
     position: fixed;
-    bottom:0;
+    bottom: 0;
     left: 0;
     background-color: var(--taupe);
     z-index: 99;
@@ -84,7 +94,7 @@ ul#hamburger_nav_list.is_open {
     justify-content: space-around;
 }
 
-#mobile_nav li{
+#mobile_nav li {
     transition: all .125s ease-in-out;
 }
 
@@ -92,7 +102,7 @@ ul#hamburger_nav_list.is_open {
     transform: scale(1.2);
 }
 
-#mobile_nav li button{
+#mobile_nav li button {
     background: none;
     border: none;
 }
@@ -109,16 +119,136 @@ ul#hamburger_nav_list.is_open {
 section.menu {
     display: flex;
     flex-wrap: wrap;
+    gap: 30px;
     justify-content: space-between;
     position: relative;
     align-items: flex-start;
+    width: 100%;
+}
+
+#Menu_wrapper {
+    width: calc(1025px - 350px - 60px);
+    flex-grow: 1;
+}
+
+.cat_title {
+    position: relative;
+    background: var(--amber-earth);
+    border-radius: 35px;
+    padding: 15px 30px;
+    margin-bottom: 25px;
+    margin-top: 50px;
+    color: #fff;
+}
+
+.cat_title img {
+    position: absolute;
+    height: 120px;
+    right: 15px;
+    bottom: -5px;
+}
+
+.meal_wrapper {
+    display: flex;
+    gap: 15px;
+    background-color: #fff;
+    border-radius: 35px;
+    padding: 10px;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-light);
+}
+
+.meal_wrapper img {
+    height: 140px;
+    width: 200px;
+    border-radius: 25px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.meal_text_wrapper {
+    margin: 10px 0;
+}
+
+.cta_wrapper {
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+button.meal_added {
+    background-color: var(--amber-earth);
 }
 
 #shopping_cart {
     position: sticky;
-    top: 0;
+    top: 50px;
+    margin-top: 50px;
     width: 350px;
     align-self: flex-start;
+    padding: 25px;
+    background-color: var(--coffee-bean);
+    border-radius: 35px;
+    color: #fff;
+}
+
+#shopping_cart_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    max-height: 500px;
+    margin: 25px 0;
+    padding-top: 5px;
+}
+
+.cart_meal_wrapper {
+    display: flex;
+    flex-flow: row-reverse;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--cream-whip);
+    color: var(--coffee-bean);
+    border-radius: 35px;
+    padding: 10px 20px;
+}
+
+.cart_meal_wrapper button {
+    flex-shrink: 1;
+    background-color: var(--amber-earth);
+    font-size: 1.2rem;
+    height: 35px;
+    aspect-ratio: 1;
+    padding: 0;
+}
+
+.cart_meal_wrapper button img {
+    filter: brightness(10);
+}
+
+h3.meal_name {
+    width: 100%;
+}
+
+.price_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 80%;
+}
+
+.price_wrapper button {
+    background-color: var(--taupe);
+}
+
+p.meal_price {
+    display: block;
+    flex-grow: 1;
+    width: 100%;
+    text-align: end;
 }
 
 /* - Menu Wrapper Styles END */
@@ -135,7 +265,7 @@ body.modal_open {
 
 #cart_modal_close_btn {
     position: absolute;
-    top:20px;
+    top: 20px;
     right: 20px;
     z-index: 2;
 }
@@ -160,9 +290,9 @@ body.modal_open {
     z-index: 1;
 }
 
-@media (max-width: 990px) {
-    #shopping_cart {
-        display: block;
+@media (max-width: 1024px) {
+    section.menu #shopping_cart {
+        display: none;
     }
 
     #mobile_nav {
@@ -215,5 +345,22 @@ body.modal_open {
 }
 
 /* Bestätigung Modal Styles END */
+
+/* section filter */
+
+section.categories_navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#categories_nav {
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+    overflow-x: auto;
+}
+
+/* section filter END */
 
 /* main Styles END */

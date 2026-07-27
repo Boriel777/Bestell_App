@@ -19,22 +19,27 @@ function getMenuTemplate(category, meal) {
 
     return `
     <section id="cat-${id}">
-        <h2 id="title-${id}">${category}</h2>
-        <div class="meal_wrapper">${mealsHTML}</div>
+        <div class="cat_title"><h2 id="title-${id}">${category}</h2><img src="/assets/icons/${id}_icon.png" alt="${meal.meal_name} icon"></div>
+        <div class="meals_wrapper">${mealsHTML}</div>
     </section>
     `;
 };
 
 function getMealTemplate(meal) {
     return `
+    <div class="meal_wrapper">
         <img src="${meal.img}" alt="${meal.meal_name} Foto">
-        <h3 class="meal_name">${meal.meal_name}</h3>
-        <p><span>Zutaten:</span> ${meal.ingredients}</p>
-        <div class="cta_wrapper"><p><span>Preis:</span> € ${meal.price.toFixed(2)}</p>
+        <div class="meal_text_wrapper">
+            <h3 class="meal_name">${meal.meal_name}</h3>
+            <p><span>Zutaten:</span> ${meal.ingredients}</p>
+        </div>
+        <div class="cta_wrapper">
+            <p><span>Preis:</span> € ${meal.price.toFixed(2)}</p>
             <button type="submit" id="to_basket_cta-${meal.id}" onclick="pushToShoppingCart('${meal.meal_name}', ${meal.price}, '${meal.id}')">
                 In den Warenkorb
             </button>
         </div>
+    </div>
     `;
 };
 
@@ -61,7 +66,7 @@ function getShoppingCartTemplate() {
         subtotal += mealPrice * mealAmount;
         ShoppingCartHTML += getShoppingCartMealTemplate(mealName, mealPrice, mealId);
     }
-    
+
     let deliveryFee = 5;
     let total = subtotal + deliveryFee;
 
@@ -82,7 +87,7 @@ function getShoppingCartMealTemplate(mealName, mealPrice, mealId) {
             <button type="submit" onclick="changeAmount('${mealId}', 1)">+</button>
             <p id="${mealId}-amount">1</p>
             <button id="${mealId}-minus" class="hidden" type="submit" onclick="changeAmount('${mealId}', -1)">-</button>
-            <p id="${mealId}-price"><span>Preis:</span> € ${mealPrice.toFixed(2)}</p>
+            <p class="meal_price" id="${mealId}-price"><span>Preis:</span> € ${mealPrice.toFixed(2)}</p>
         </div>
     </div>
     `;

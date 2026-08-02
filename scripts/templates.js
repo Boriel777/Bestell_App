@@ -19,7 +19,7 @@ function getMenuTemplate(category, meal) {
 
     return `
     <section id="cat-${id}">
-        <div class="cat_title"><h2 id="title-${id}">${category}</h2><img src="/assets/icons/${id}_icon.png" alt="${category} icon"></div>
+        <div class="cat_title"><h2 id="title-${id}">${category}</h2><img src="assets/icons/${id}_icon.png" alt="${category} icon"></div>
         <div class="meals_wrapper">${mealsHTML}</div>
     </section>
     `;

@@ -15,6 +15,7 @@
     --coffee-bean: #221c1bff;
     --taupe: #51443dff;
     --amber-earth: #dc7b04ff;
+    --amber-dark: #ca590d;
     --papaya-whip: #fef1d7ff;
     --cream-whip: #f8f3e9;
     --powder-blue: #a6c6deff;
@@ -32,6 +33,12 @@
     scrollbar-color: var(--amber-earth) var(--taupe);
 }
 
+@media (max-width:768px) {
+    *{
+        scrollbar-width: auto;
+    }
+}
+
 html,
 body {
 
@@ -44,6 +51,7 @@ body {
 main {
     display: flex;
     flex-direction: column;
+    padding-bottom: 80px;
     margin: 0 10px;
     gap: 25px;
 }
@@ -95,7 +103,7 @@ button {
     color: var(--cream-whip);
     font-size: 0.8rem;
     font-weight: var(--bold);
-    transition: all 35ms ease-in-out;
+    transition: all 45ms ease-in-out;
 }
 
 button:hover {

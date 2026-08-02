@@ -19,7 +19,7 @@ function getMenuTemplate(category, meal) {
 
     return `
     <section id="cat-${id}">
-        <div class="cat_title"><h2 id="title-${id}">${category}</h2><img src="/assets/icons/${id}_icon.png" alt="${meal.meal_name} icon"></div>
+        <div class="cat_title"><h2 id="title-${id}">${category}</h2><img src="/assets/icons/${id}_icon.png" alt="${category} icon"></div>
         <div class="meals_wrapper">${mealsHTML}</div>
     </section>
     `;
@@ -49,8 +49,8 @@ function getShoppingCartTemplate() {
     if (ShoppingCartArray.length === 0) {
         return `
         <h2>Dein Warenkorb</h2>
-        <p>Dein Warenkorb ist leer.</p>
-        <img src="assets/icons/shopping_cart.svg" alt="Leerer Warenkorb">
+        <p>Dein Warenkorb ist leer. </br> Bestelle was leckeres.</p>
+        <img class="empty_cart_img" src="assets/icons/shopping_cart.svg" alt="Leerer Warenkorb">
         `;
     }
 
@@ -74,7 +74,7 @@ function getShoppingCartTemplate() {
     <h2>Dein Warenkorb</h2>
     <div id="shopping_cart_wrapper">${ShoppingCartHTML}</div>
     <div id="check_sum">${getShoppingCartSumTemplate(subtotal, deliveryFee, total)}</div>
-    <button onclick="placeOrder()">Jetzt Bestellen</button>
+    <button class="order_cta_btn" onclick="placeOrder()">Jetzt Bestellen</button>
     `;
 };
 

@@ -19,6 +19,45 @@ header.main_header {
     border-radius: 0 0 35px 35px;
 }
 
+.restaurant_title_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+
+.restaurant_logo {
+    display: block;
+    background-color: var(--amber-earth);
+    padding: 15px;
+    height: 80px;
+    width: 80px;
+    border: 5px solid var(--coffee-bean);
+    border-radius: 50px;
+    overflow: visible;
+}
+
+.review_wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 2px;
+}
+
+.review_star {
+    filter: saturate(100) hue-rotate(15deg) brightness(3);
+    padding-bottom: 5px;
+}
+
+.review_star:nth-child(5) {
+    filter: none;
+}
+
+.review_wrapper p {
+    padding: 3px 0 0 5px;
+}
+
 /* Nav Styles */
 
 #hamburger_btn {
@@ -186,16 +225,16 @@ button.meal_added {
 
 
 @media (max-width: 768px) {
-    
+
     .cat_title {
         margin-top: 80px;
     }
-    
+
     .cat_title img {
         height: 100px;
         bottom: -38px;
         right: 0;
-    }    
+    }
 
     .meal_wrapper {
         flex-direction: column;
@@ -438,7 +477,7 @@ section.categories_navigation {
 
 /* footer Styles */
 
-footer{
+footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -447,7 +486,7 @@ footer{
 }
 
 @media (max-width: 1024px) {
-    footer{
+    footer {
         padding-bottom: 160px;
     }
 }

@@ -205,7 +205,7 @@ function openCartModal() {
     cartRef.classList.remove("hidden");
 
     modalRef.onclick = closeCartModal;
-    cartRef.onclick = function(event) {
+    cartRef.onclick = function (event) {
         event.stopPropagation();
     }
     closeRef.onclick = closeCartModal;

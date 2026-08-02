@@ -51,8 +51,8 @@ function buildHamburgerNav(navPoints) {
 };
 
 function renderNavPoints() {
-  let navPoints = addNavPoints(Menu);
-  document.querySelector("#hamburger_nav_list").innerHTML = buildHamburgerNav(navPoints);
+    let navPoints = addNavPoints(Menu);
+    document.querySelector("#hamburger_nav_list").innerHTML = buildHamburgerNav(navPoints);
 };
 
 //Filter Function
@@ -85,7 +85,7 @@ function filterMenu(category) {
             } else {
                 sections[i].classList.add("hidden");
             }
-        }        
+        }
     }
 };
 

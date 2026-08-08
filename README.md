@@ -58,7 +58,7 @@ The main focus was on **dynamic content rendering**, **shopping cart logic**, **
 
 ## 📸 Preview / Demo
 
-- [Live Demo](https://boriel777.github.io/Bestell_App/)
+- [Live Demo](https://www.boriel-designs.com/projects/bestell-app/index.html)
 
 ---
 

@@ -84,9 +84,9 @@ function getShoppingCartMealTemplate(mealName, mealPrice, mealId) {
         <h3 class="meal_name">${mealName}</h3>
         <button type="submit" id="${mealId}-delete" onclick="removeFromCart('${mealId}')"><img src="assets/icons/delete.svg"></button>
         <div class="price_wrapper">
-            <button type="submit" onclick="changeAmount('${mealId}', 1)">+</button>
+            <button id="${mealId}-minus" class="invisible" type="submit" onclick="changeAmount('${mealId}', -1)">-</button>
             <p id="${mealId}-amount">1</p>
-            <button id="${mealId}-minus" class="hidden" type="submit" onclick="changeAmount('${mealId}', -1)">-</button>
+            <button type="submit" onclick="changeAmount('${mealId}', 1)">+</button>
             <p class="meal_price" id="${mealId}-price"><span>Preis:</span> € ${mealPrice.toFixed(2)}</p>
         </div>
     </div>

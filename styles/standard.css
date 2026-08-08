@@ -12,4 +12,9 @@
     display: none;
 }
 
+.invisible {
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* Standard CSS END */

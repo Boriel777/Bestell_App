@@ -36,6 +36,7 @@ function getMealTemplate(meal) {
 function getShoppingCartTemplate(isEmpty, shoppingCartHTML, subtotal, deliveryFee, total) {
     if (isEmpty) {
         return `
+        <button id="cart_modal_close_btn" aria-label="Warenkorb schließen">&times;</button>
         <h2>Dein Warenkorb</h2>
         <p>Dein Warenkorb ist leer. </br> Bestelle was leckeres.</p>
         <img class="empty_cart_img" src="assets/icons/shopping_cart.svg" alt="Leerer Warenkorb">

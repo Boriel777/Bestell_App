@@ -1,25 +1,13 @@
-function zuAscii(text) {
-    return text
-        .toLowerCase()
-        .replace(/ä/g, "ae")
-        .replace(/ö/g, "oe")
-        .replace(/ü/g, "ue")
-        .replace(/ß/g, "ss")
-        .replace(/\s+/g, "-");
-}
-
-
+// Main templates
 
 function getMenuTemplate(category, meal) {
     let mealsHTML = "";
-    let id = zuAscii(category);
-    for (let meal_i = 0; meal_i < meal.length; meal_i++) {
-        mealsHTML += getMealTemplate(meal[meal_i]);
+    for (let mealI = 0; mealI < meal.length; mealI++) {
+        mealsHTML += getMealTemplate(meal[mealI]);
     }
-
     return `
-    <section id="cat-${id}">
-        <div class="cat_title"><h2 id="title-${id}">${category}</h2><img src="assets/icons/${id}_icon.png" alt="${category} icon"></div>
+    <section id="cat-${category.id}">
+        <div class="cat_title"><h2 id="title-${category.id}">${category.name}</h2><img src="assets/icons/${category.id}_icon.png" alt="${category.name} icon"></div>
         <div class="meals_wrapper">${mealsHTML}</div>
     </section>
     `;
@@ -28,14 +16,14 @@ function getMenuTemplate(category, meal) {
 function getMealTemplate(meal) {
     return `
     <div class="meal_wrapper">
-        <img src="${meal.img}" alt="${meal.meal_name} Foto">
+        <img src="${meal.img}" alt="${meal.mealName} Foto">
         <div class="meal_text_wrapper">
-            <h3 class="meal_name">${meal.meal_name}</h3>
+            <h3 class="mealName">${meal.mealName}</h3>
             <p><span>Zutaten:</span> ${meal.ingredients}</p>
         </div>
         <div class="cta_wrapper">
             <p><span>Preis:</span> € ${meal.price.toFixed(2)}</p>
-            <button type="submit" id="to_basket_cta-${meal.id}" onclick="pushToShoppingCart('${meal.meal_name}', ${meal.price}, '${meal.id}')">
+            <button type="submit" id="to-basket-cta-${meal.id}" onclick="pushToShoppingCart('${meal.mealName}', ${meal.price}, '${meal.id}')">
                 In den Warenkorb
             </button>
         </div>
@@ -43,36 +31,20 @@ function getMealTemplate(meal) {
     `;
 };
 
-let ShoppingCartArray = [];
+// Shopping cart templates
 
-function getShoppingCartTemplate() {
-    if (ShoppingCartArray.length === 0) {
+function getShoppingCartTemplate(isEmpty, shoppingCartHTML, subtotal, deliveryFee, total) {
+    if (isEmpty) {
         return `
         <h2>Dein Warenkorb</h2>
         <p>Dein Warenkorb ist leer. </br> Bestelle was leckeres.</p>
         <img class="empty_cart_img" src="assets/icons/shopping_cart.svg" alt="Leerer Warenkorb">
         `;
     }
-
-    let ShoppingCartHTML = "";
-    let subtotal = 0;
-
-    for (let i = 0; i < ShoppingCartArray.length; i++) {
-        let mealName = ShoppingCartArray[i].title;
-        let mealPrice = ShoppingCartArray[i].price;
-        let mealId = ShoppingCartArray[i].id;
-        let mealAmount = ShoppingCartArray[i].amount;
-
-        subtotal += mealPrice * mealAmount;
-        ShoppingCartHTML += getShoppingCartMealTemplate(mealName, mealPrice, mealId);
-    }
-
-    let deliveryFee = 5;
-    let total = subtotal + deliveryFee;
-
     return `
+    <button id="cart_modal_close_btn" aria-label="Warenkorb schließen">&times;</button>
     <h2>Dein Warenkorb</h2>
-    <div id="shopping_cart_wrapper">${ShoppingCartHTML}</div>
+    <div id="shopping_cart_wrapper">${shoppingCartHTML}</div>
     <div id="check_sum">${getShoppingCartSumTemplate(subtotal, deliveryFee, total)}</div>
     <button class="order_cta_btn" onclick="placeOrder()">Jetzt Bestellen</button>
     `;
@@ -81,7 +53,7 @@ function getShoppingCartTemplate() {
 function getShoppingCartMealTemplate(mealName, mealPrice, mealId) {
     return `
     <div class="cart_meal_wrapper" id="${mealId}">
-        <h3 class="meal_name">${mealName}</h3>
+        <h3 class="mealName">${mealName}</h3>
         <button type="submit" id="${mealId}-delete" onclick="removeFromCart('${mealId}')"><img src="assets/icons/delete.svg"></button>
         <div class="price_wrapper">
             <button id="${mealId}-minus" class="invisible" type="submit" onclick="changeAmount('${mealId}', -1)">-</button>
@@ -102,4 +74,26 @@ function getShoppingCartSumTemplate(subtotal, deliveryFee, total) {
         <span>Gesamtbetrag:</span><p>€ ${total.toFixed(2)}</p>
         </div>
     `;
+};
+
+// Navigation templates
+
+function buildHamburgerNav(navPoints) {
+    let navPointHTML = `<li><button onclick="filterMenu('alle'); toggleHamburgerMenu();">Alle</button></li>`;
+    for (let i = 0; i < navPoints.length; i++) {
+        navPointHTML += `
+        <li><button onclick="filterMenu('${navPoints[i].id}'); toggleHamburgerMenu();">${navPoints[i].name}</button></li>
+        `;
+    };
+    return navPointHTML;
+};
+
+function buildFilterButtons(navPoints) {
+    let filterHTML = `<button class="filter-btn" onclick="filterMenu('alle')">Alle</button>`;
+    for (let i = 0; i < navPoints.length; i++) {
+        filterHTML += `
+        <button class="filter-btn" onclick="filterMenu('${navPoints[i].id}')">${navPoints[i].name}</button>
+        `;
+    }
+    return filterHTML;
 };

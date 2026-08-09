@@ -301,7 +301,7 @@ button.meal_added {
     filter: brightness(10);
 }
 
-h3.meal_name {
+h3.mealName {
     width: 100%;
 }
 
@@ -339,11 +339,20 @@ body.modal_open {
 }
 
 #cart_modal_close_btn {
+    display: none;
+}
+
+#cart_modal #cart_modal_close_btn, .modal_content #modal_close {
+    display: block;
     position: absolute;
-    top: 100px;
-    right: 20px;
+    top: -10px;
+    right: 0;
     background-color: var(--amber-earth);
-    z-index: 2;
+    font-size: 2rem;
+    height: 60px;
+    width: 60px;
+    line-height: 0;
+    padding: 20px;
 
 }
 
@@ -450,13 +459,6 @@ body.modal_open {
     margin: 100px auto;
     padding: 30px;
     text-align: center;
-}
-
-.modal_content #modal_close {
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    background-color: var(--amber-earth);
 }
 
 .modal_content img {

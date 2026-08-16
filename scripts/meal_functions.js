@@ -29,6 +29,14 @@ function getMealsForCategory(categoryId) {
     return mealsInCategory;
 };
 
+function buildMealsHTML (mealsInCategory) {
+    let mealsHTML = "";
+    for (let i = 0; i < mealsInCategory.length; i++) {
+        mealsHTML += getMealTemplate(mealsInCategory[i]);
+    };
+    return mealsHTML;
+}
+
 function addMenuHTML() {
     let contentRef = document.getElementById('Menu_wrapper');
     contentRef.innerHTML = "";
@@ -36,7 +44,8 @@ function addMenuHTML() {
     for (let i = 0; i < categoryArray.length; i++) {
         let currentCategory = categoryArray[i];
         let mealsInCategory = getMealsForCategory(currentCategory.id);
-        contentRef.innerHTML += getMenuTemplate(currentCategory, mealsInCategory);
+        let mealsHTML = buildMealsHTML(mealsInCategory);
+        contentRef.innerHTML += getMenuTemplate(currentCategory, mealsHTML);
     };
     syncCtaButtons();
 };

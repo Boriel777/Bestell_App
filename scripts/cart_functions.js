@@ -12,7 +12,7 @@ function findCartMeal(mealId) {
 function calculateSubtotal() {
     let subtotal = 0;
     for (let i = 0; i < shoppingCartArray.length; i++) {
-        subtotal += shoppingCartArray[i].price * shoppingCartArray[i].amount;        
+        subtotal += shoppingCartArray[i].price * shoppingCartArray[i].amount;
     };
     return subtotal;
 };
@@ -30,13 +30,16 @@ function buildShoppingCartHTML() {
 
 function addShoppingCartHTML() {
     let contentRef = document.getElementById('shopping_cart');
-    let isEmpty = shoppingCartArray.length === 0;
-    let shoppingCartHTML = buildShoppingCartHTML();
-    let subtotal = calculateSubtotal();
-    let deliveryFee = 5;
-    let total = subtotal + deliveryFee;
-         
-    contentRef.innerHTML = getShoppingCartTemplate(isEmpty, shoppingCartHTML, subtotal, deliveryFee, total);
+
+    if (shoppingCartArray.length === 0) {
+        contentRef.innerHTML = getEmptyCartTemplate();
+    } else {
+        let shoppingCartHTML = buildShoppingCartHTML();
+        let subtotal = calculateSubtotal();
+        let deliveryFee = 5;
+        let total = subtotal + deliveryFee;
+        contentRef.innerHTML = getShoppingCartTemplate(shoppingCartHTML, subtotal, deliveryFee, total);
+    };
     syncCartDisplay();
 };
 
@@ -52,18 +55,18 @@ function updateCartDom(wasEmpty, existingMeal, mealName, mealPrice, mealId) {
 function pushToShoppingCart(mealName, mealPrice, mealId) {
     let wasEmpty = shoppingCartArray.length === 0;
     let existingMeal = findCartMeal(mealId);
-    
+
     if (existingMeal) {
         existingMeal.amount += 1;
     } else {
-        shoppingCartArray.push({id: mealId, title: mealName, price: mealPrice, amount: 1});
+        shoppingCartArray.push({ id: mealId, title: mealName, price: mealPrice, amount: 1 });
     };
 
     updateCartDom(wasEmpty, existingMeal, mealName, mealPrice, mealId);
     refreshCart(mealId);
     return shoppingCartArray;
 };
- 
+
 
 function updateShoppingCartDisplay(mealId) {
     let meal = findCartMeal(mealId);

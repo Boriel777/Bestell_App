@@ -15,12 +15,30 @@ function toggleHamburgerMenu() {
     };
 };
 
+function buildNavPointsHTML(navPoints) {
+    let navPointsHTML = "";
+    for (let i = 0; i < navPoints.length; i++) {
+        navPointsHTML += getHamburgerNavItemTemplate(navPoints[i].id, navPoints[i].name)
+    };
+    return navPointsHTML;
+};
+
 function renderNavPoints() {
-    document.querySelector("#hamburger_nav_list").innerHTML = buildHamburgerNav(categoryArray);
+    let navPointsHTML = buildNavPointsHTML(categoryArray);
+    document.querySelector("#hamburger_nav_list").innerHTML = buildHamburgerNav(navPointsHTML);
+};
+
+function buildFilterButtonsHTML(navPoints) {
+    let filterButtonsHTML = "";
+    for (let i = 0; i < navPoints.length; i++) {
+        filterButtonsHTML += getFilterButtonTemplate(navPoints[i].id, navPoints[i].name)
+    };
+    return filterButtonsHTML;
 };
 
 function renderFilterButtons() {
-    document.querySelector("#categories_nav").innerHTML = buildFilterButtons(categoryArray);
+    let filterButtonsHTML = buildFilterButtonsHTML(categoryArray);
+        document.querySelector("#categories_nav").innerHTML = buildFilterButtons(filterButtonsHTML);
 };
 
 function filterMenu(categoryId) {

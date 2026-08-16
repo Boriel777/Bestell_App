@@ -1,8 +1,4 @@
-function getMenuTemplate(category, meal) {
-    let mealsHTML = "";
-    for (let mealI = 0; mealI < meal.length; mealI++) {
-        mealsHTML += getMealTemplate(meal[mealI]);
-    }
+function getMenuTemplate(category, mealsHTML) {
     return `
     <section id="cat-${category.id}">
         <div class="cat_title"><h2 id="title-${category.id}">${category.name}</h2><img src="assets/icons/${category.id}_icon.png" alt="${category.name} icon"></div>
@@ -29,15 +25,16 @@ function getMealTemplate(meal) {
     `;
 };
 
-function getShoppingCartTemplate(isEmpty, shoppingCartHTML, subtotal, deliveryFee, total) {
-    if (isEmpty) {
-        return `
+function getEmptyCartTemplate() {
+    return `
         <button id="cart_modal_close_btn" aria-label="Warenkorb schließen">&times;</button>
         <h2>Dein Warenkorb</h2>
         <p>Dein Warenkorb ist leer. </br> Bestelle was leckeres.</p>
         <img class="empty_cart_img" src="assets/icons/shopping_cart.svg" alt="Leerer Warenkorb">
         `;
-    }
+};
+
+function getShoppingCartTemplate(shoppingCartHTML, subtotal, deliveryFee, total) {
     return `
     <button id="cart_modal_close_btn" aria-label="Warenkorb schließen">&times;</button>
     <h2>Dein Warenkorb</h2>
@@ -73,22 +70,18 @@ function getShoppingCartSumTemplate(subtotal, deliveryFee, total) {
     `;
 };
 
-function buildHamburgerNav(navPoints) {
-    let navPointHTML = `<li><button onclick="filterMenu('alle'); toggleHamburgerMenu();">Alle</button></li>`;
-    for (let i = 0; i < navPoints.length; i++) {
-        navPointHTML += `
-        <li><button onclick="filterMenu('${navPoints[i].id}'); toggleHamburgerMenu();">${navPoints[i].name}</button></li>
-        `;
-    };
-    return navPointHTML;
+function getHamburgerNavItemTemplate(categoryId, categoryName) {
+    return `<li><button onclick="filterMenu('${categoryId}'); toggleHamburgerMenu();">${categoryName}</button></li>`;
 };
 
-function buildFilterButtons(navPoints) {
-    let filterHTML = `<button class="filter-btn" onclick="filterMenu('alle')">Alle</button>`;
-    for (let i = 0; i < navPoints.length; i++) {
-        filterHTML += `
-        <button class="filter-btn" onclick="filterMenu('${navPoints[i].id}')">${navPoints[i].name}</button>
-        `;
-    }
-    return filterHTML;
+function buildHamburgerNav(navPointsHTML) {
+    return `<li><button onclick="filterMenu('alle'); toggleHamburgerMenu();">Alle</button></li>${navPointsHTML}`;
+};
+
+function getFilterButtonTemplate(categoryId, categoryName) {
+    return  `<button class="filter-btn" onclick="filterMenu('${categoryId}')">${categoryName}</button>`;
+};
+
+function buildFilterButtons(filterButtonsHTML) {
+    return `<button class="filter-btn" onclick="filterMenu('alle')">Alle</button>${filterButtonsHTML}`;
 };

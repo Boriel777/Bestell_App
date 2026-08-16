@@ -1,5 +1,3 @@
-// Main templates
-
 function getMenuTemplate(category, meal) {
     let mealsHTML = "";
     for (let mealI = 0; mealI < meal.length; mealI++) {
@@ -30,8 +28,6 @@ function getMealTemplate(meal) {
     </div>
     `;
 };
-
-// Shopping cart templates
 
 function getShoppingCartTemplate(isEmpty, shoppingCartHTML, subtotal, deliveryFee, total) {
     if (isEmpty) {
@@ -76,8 +72,6 @@ function getShoppingCartSumTemplate(subtotal, deliveryFee, total) {
         </div>
     `;
 };
-
-// Navigation templates
 
 function buildHamburgerNav(navPoints) {
     let navPointHTML = `<li><button onclick="filterMenu('alle'); toggleHamburgerMenu();">Alle</button></li>`;

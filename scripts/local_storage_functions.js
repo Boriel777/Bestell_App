@@ -1,6 +1,3 @@
-// Local Storage Manipulation
-
-//save functions
 function saveToLocalStorage() {
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCartArray));
 }

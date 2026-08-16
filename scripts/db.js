@@ -1,5 +1,5 @@
 let menu = [
-    // ---------- Salate ----------
+    // ---------- Salads ----------
     {
         id: "salad-01",
         mealName: "Caesar Salat",
@@ -33,7 +33,7 @@ let menu = [
         img: "assets/img/s-hirten.jpeg"
     },
 
-    // ---------- Suppen ----------
+    // ---------- Soups ----------
     {
         id: "soup-01",
         mealName: "Gulaschsuppe",
@@ -67,7 +67,7 @@ let menu = [
         img: "assets/img/su-corbasi.jpeg"
     },
 
-    // ---------- Pizzen ----------
+    // ---------- Pizza ----------
     {
         id: "pizza-01",
         mealName: "Pizza Margherita",
@@ -165,7 +165,7 @@ let menu = [
         img: "assets/img/p-frutti-di-mare.jpeg"
     },
 
-    // ---------- Österreichische Küche ----------
+    // ---------- Austrian Cousine ----------
     {
         id: "at-01",
         mealName: "Wiener Schnitzel",
@@ -199,7 +199,7 @@ let menu = [
         img: "assets/img/oe-backhendl.jpeg"
     },
 
-    // ---------- Türkische Küche ----------
+    // ---------- Turkish Cousine ----------
     {
         id: "turkish-01",
         mealName: "Adana Kebap",
@@ -275,7 +275,7 @@ let menu = [
         img: "assets/img/d-panna-cotta.jpg"
     },
 
-    // ---------- Getränke ----------
+    // ---------- Drinks ----------
     {
         id: "drink-01",
         mealName: "Apfelsaft gespritzt",
@@ -317,7 +317,7 @@ let menu = [
         img: "assets/img/g-tee.jpg"
     },
 
-    // ---------- Kindermenü ----------
+    // ---------- Kids Menu ----------
     {
         id: "kids-01",
         mealName: "Kinder Schnitzel mit Pommes",

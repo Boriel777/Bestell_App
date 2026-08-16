@@ -1,4 +1,3 @@
-// Cart modal (mobile)
 function attachCartModalCloseHandlers(modalRef, cartRef, closeRef) {
     modalRef.onclick = closeCartModal;
     cartRef.onclick= function (event) {
@@ -29,8 +28,6 @@ function closeCartModal() {
     document.getElementById('cart_modal').classList.add("hidden");
     document.body.classList.remove("modal_open");
 };
-
-// Order confirmation modal
 
 function openModal() {
     let modalRef = document.getElementById("order_modal");

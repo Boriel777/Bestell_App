@@ -1,5 +1,3 @@
-// Hamburger menu
-
 function toggleHamburgerMenu() {
     let btnRef = document.getElementById('hamburger_btn');
     let navRef = document.getElementById('hamburger_nav_list');
@@ -20,8 +18,6 @@ function toggleHamburgerMenu() {
 function renderNavPoints() {
     document.querySelector("#hamburger_nav_list").innerHTML = buildHamburgerNav(categoryArray);
 };
-
-// Filter Function
 
 function renderFilterButtons() {
     document.querySelector("#categories_nav").innerHTML = buildFilterButtons(categoryArray);

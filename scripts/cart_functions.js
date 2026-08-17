@@ -106,6 +106,7 @@ function removeFromCart(mealId) {
     saveToLocalStorage();
     addShoppingCartHTML();
     syncCtaButtons();
+    updateCartCounter();
 };
 
 function updateMealCtaBtn(mealId) {
@@ -137,10 +138,20 @@ function updateCheckSum() {
 
 };
 
+function updateCartCounter() {
+    let totalItems = 0;
+    for (let i = 0; i < shoppingCartArray.length; i++) {
+        totalItems += shoppingCartArray[i].amount;
+    };
+    let cartTriggerRef = document.getElementById('cart_trigger');
+    cartTriggerRef.setAttribute('data-count', totalItems);
+};
+
 function refreshCart(mealId) {
     updateShoppingCartDisplay(mealId);
     updateMealCtaBtn(mealId);
     updateCheckSum();
+    updateCartCounter();
     saveToLocalStorage();
 };
 
@@ -149,6 +160,7 @@ function clearCart() {
     saveToLocalStorage();
     addShoppingCartHTML();
     syncCtaButtons();
+    updateCartCounter();
 };
 
 function placeOrder() {

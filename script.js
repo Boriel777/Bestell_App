@@ -4,6 +4,7 @@ function init() {
     addShoppingCartHTML();
     renderNavPoints();
     renderFilterButtons();
+    updateCartCounter();
 };
 
 init();

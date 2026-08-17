@@ -5,7 +5,7 @@ header.main_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px;
+    padding: 25px var(--content-padding);
 }
 
 /* Header Styles END */
@@ -101,12 +101,20 @@ ul#hamburger_nav_list.is_open {
     top: 102px;
     left: 0;
     z-index: 999;
-    height: 90%;
+    height: calc(100% - 103px);
     width: 100%;
     text-align: center;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+html:has(#hamburger_nav_list.is_open) {
+    overflow: hidden;
+}
+
+body:has(#hamburger_nav_list.is_open) {
+    overflow-y: hidden;
 }
 
 #hamburger_nav_list button {
@@ -156,6 +164,11 @@ ul#hamburger_nav_list.is_open {
 
 /* - Menu Wrapper Styles */
 
+section[id^="cat-"] {
+    width: 100%;
+    padding: 0 var(--content-padding);
+}
+
 section.menu {
     display: flex;
     flex-wrap: wrap;
@@ -171,21 +184,46 @@ section.menu {
     flex-grow: 1;
 }
 
+@media (max-width: 1024px) {
+    #Menu_wrapper {
+        width: 100%;
+    }
+}
+
 .cat_title {
     position: relative;
-    background: var(--amber-earth);
     border-radius: 35px;
     padding: 15px 30px;
     margin-bottom: 25px;
     margin-top: 50px;
     color: #fff;
+    z-index: 0;
+}
+
+.cat_title::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -100%;
+    top: 0;
+    background: var(--amber-earth);
+    width: 300%;
+    height: 70px;
+    z-index: 0;
+}
+
+h2[id^="title-"] {
+    position: relative;
+    padding-left: 120px;
+    z-index: 1;
 }
 
 .cat_title img {
     position: absolute;
     height: 120px;
-    right: 15px;
+    left: 0;
     bottom: -5px;
+    z-index: 1;
 }
 
 .meal_wrapper {
@@ -224,16 +262,31 @@ button.meal_added {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+
+    section[id^="cat-"] {
+        padding: 0;
+    }
 
     .cat_title {
         margin-top: 80px;
+        margin-bottom: 45px;
+        background: var(--amber-earth);
+        width: 100%;
+    }
+
+    .cat_title::after {
+        height: 82px;
     }
 
     .cat_title img {
         height: 100px;
-        bottom: -38px;
         right: 0;
+    }
+
+    h2[id^="title-"] {
+        padding-left: 80px;
+        font-size: 1.5rem;
     }
 
     .meal_wrapper {
@@ -251,16 +304,16 @@ button.meal_added {
 
 }
 
-
 #shopping_cart {
     position: sticky;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 15px;
     top: 50px;
     margin-top: 50px;
     width: 350px;
-    align-self: flex-start;
+    min-height: 30dvh;
     padding: 25px;
     background-color: var(--coffee-bean);
     border-radius: 35px;
@@ -334,15 +387,20 @@ p.meal_price {
     display: none;
 }
 
-body.modal_open {
+html:has(body.modal_open) {
     overflow: hidden;
+}
+
+body.modal_open {
+    overflow-y: hidden;
 }
 
 #cart_modal_close_btn {
     display: none;
 }
 
-#cart_modal #cart_modal_close_btn, .modal_content #modal_close {
+#cart_modal #cart_modal_close_btn,
+.modal_content #modal_close {
     display: block;
     position: absolute;
     top: -10px;
@@ -371,8 +429,10 @@ body.modal_open {
     flex-direction: column;
     gap: 25px;
     position: relative;
+    top: 40px;
     width: 100%;
-    max-height: 80dvh;
+    height: calc(100% - 40px - 85px);
+    max-height: 100dvh;
     background-color: var(--coffee-bean);
     max-width: 400px;
     margin: auto;
@@ -381,7 +441,8 @@ body.modal_open {
 }
 
 #shopping_cart .empty_cart_img {
-    height: 250px;
+    padding-top: 50px;
+    height: 180px;
     opacity: 50%;
 }
 
@@ -392,6 +453,27 @@ body.modal_open {
 
     #mobile_nav {
         display: block;
+    }
+
+    #cart_trigger::after {
+        content: attr(data-count);
+        font-size: 2rem;
+        position: absolute;
+        top: -10px;
+        right: 15px;
+        width: 60px;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        padding: 5px;
+        border-radius: 50px;
+        background: var(--amber-earth);
+        align-items: center;
+        justify-content: center;
+        transform: scale(0.4);
+    }
+
+    #cart_trigger[data-count="0"]::after {
+        display: none;
     }
 }
 

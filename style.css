@@ -301,6 +301,7 @@ button.meal_added {
     margin-top: 50px;
     width: 350px;
     min-height: 30dvh;
+    max-height: 90dvh;
     padding: 25px;
     background-color: var(--coffee-bean);
     border-radius: 35px;

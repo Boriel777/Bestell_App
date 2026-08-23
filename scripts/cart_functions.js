@@ -102,11 +102,7 @@ function removeFromCart(mealId) {
             break;
         }
     }
-
-    saveToLocalStorage();
-    addShoppingCartHTML();
-    syncCtaButtons();
-    updateCartCounter();
+    updateCart();
 };
 
 function updateMealCtaBtn(mealId) {
@@ -157,6 +153,10 @@ function refreshCart(mealId) {
 
 function clearCart() {
     shoppingCartArray = [];
+    updateCart();
+};
+
+function updateCart() {
     saveToLocalStorage();
     addShoppingCartHTML();
     syncCtaButtons();

@@ -26,6 +26,9 @@
     /*measurements*/
     --content-max-width: 1440px;
     --content-padding: max(20px, calc((100% - var(--content-max-width)) / 2));
+    --category-padding: max(20px, calc((100dvw - 1440px) / 2));
+    --cart-width: 350px;
+    --cart-gap: 30px;
 
 }
 
@@ -52,7 +55,7 @@ body {
     font-size: 16px;
     color: var(--coffee-bean);
     background-color: var(--cream-whip);
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 main {
@@ -64,7 +67,7 @@ main {
     gap: 25px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     main {
         margin: 0 clamp(0.3125rem, -2.2768rem + 12.9464vw, 9.375rem);
     }
@@ -113,6 +116,7 @@ button {
     font-size: 0.8rem;
     font-weight: var(--bold);
     transition: all 45ms ease-in-out;
+    cursor: pointer;
 }
 
 button:hover {

@@ -6,5 +6,3 @@ function init() {
     renderFilterButtons();
     updateCartCounter();
 };
-
-init();
